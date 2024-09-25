@@ -27,7 +27,6 @@ const HomeScreen = () => {
     }
   };
 
-  // AsyncStorage'a index'i kaydet
   const saveIndex = async (index) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, index.toString());
@@ -36,23 +35,22 @@ const HomeScreen = () => {
     }
   };
 
-  // Kart değiştirildiğinde index'i kaydet
   const goNext = () => {
     const newIndex = (currentIndex + 1) % words.cards.length;
     setCurrentIndex(newIndex);
-    saveIndex(newIndex); // Yeni index'i kaydet
+    saveIndex(newIndex);
     setFlipped(false);
   };
 
   const goPrevious = () => {
     const newIndex = (currentIndex - 1 + words.cards.length) % words.cards.length;
     setCurrentIndex(newIndex);
-    saveIndex(newIndex); // Yeni index'i kaydet
+    saveIndex(newIndex);
     setFlipped(false);
   };
 
   useEffect(() => {
-    loadIndex(); // Bileşen yüklendiğinde kaydedilen index'i yükle
+    loadIndex();
   }, []);
 
   const flipCard = () => {

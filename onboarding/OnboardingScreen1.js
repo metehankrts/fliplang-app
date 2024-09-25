@@ -22,7 +22,7 @@ const OnboardingScreen1 = ({ navigation }) => {
             friction: 3,
             useNativeDriver: true,
         }).start();
-        navigation.navigate('OnboardingScreen2'); // Ana ekrana geçiş
+        navigation.navigate('OnboardingScreen2');
     };
 
     return (

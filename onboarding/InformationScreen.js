@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, SafeAreaView, TextInput, Image, TouchableOpacity, Modal, FlatList, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import React, { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage'; // Import AsyncStorage
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import IMAGES from '../constants/Images';
 import COLORS from '../constants/Colors';
 import FONTS from '../constants/Fonts';
@@ -27,8 +27,8 @@ const InformationScreen = ({ navigation }) => {
     const handleContinue = async () => {
         try {
             await AsyncStorage.setItem('userName', name);
-            await AsyncStorage.setItem('userImage', JSON.stringify(selectedImage)); // Stringify the image
-            navigation.navigate('MainContainer'); // Navigate to main container
+            await AsyncStorage.setItem('userImage', JSON.stringify(selectedImage));
+            navigation.navigate('MainContainer');
         } catch (error) {
             console.error(error);
         }
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: 20, // Elemanlar için kenar boşluğu ekleyin
+        paddingHorizontal: 20,
     },
     imgView: {
         justifyContent: 'center',

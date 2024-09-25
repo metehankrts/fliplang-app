@@ -7,26 +7,24 @@ import IMAGES from '../../constants/Images';
 import words from '../../data/words.json';
 import AUDIOS from '../../constants/Audios';
 
-const STORAGE_KEY = '@library_scroll_index'; // Scroll pozisyonunu saklayacağımız key
+const STORAGE_KEY = '@library_scroll_index';
 
 const LibraryScreen = () => {
   const sound = useRef(new Audio.Sound()).current;
-  const [scrollIndex, setScrollIndex] = useState(0); // Kaydedilen scroll pozisyonu
-  const scrollViewRef = useRef(null); // ScrollView'a erişmek için referans
+  const [scrollIndex, setScrollIndex] = useState(0);
+  const scrollViewRef = useRef(null);
 
-  // AsyncStorage'dan kaydedilen scroll pozisyonunu yükle
   const loadScrollIndex = async () => {
     try {
       const savedIndex = await AsyncStorage.getItem(STORAGE_KEY);
       if (savedIndex !== null) {
-        setScrollIndex(Number(savedIndex)); // Kaydedilen scroll pozisyonunu yükle
+        setScrollIndex(Number(savedIndex));
       }
     } catch (error) {
       console.error('Error loading scroll index: ', error);
     }
   };
 
-  // ScrollView'ın pozisyonunu kaydet
   const saveScrollIndex = async (index) => {
     try {
       await AsyncStorage.setItem(STORAGE_KEY, index.toString());
@@ -35,36 +33,31 @@ const LibraryScreen = () => {
     }
   };
 
-  // Ses çalma fonksiyonu
   const playSound = async (audioKey) => {
     try {
-      await sound.unloadAsync(); // Mevcut sesi durdur
-      await sound.loadAsync(AUDIOS[audioKey]); // Yeni sesi yükle
-      await sound.playAsync(); // Yeni sesi çal
+      await sound.unloadAsync();
+      await sound.loadAsync(AUDIOS[audioKey]);
+      await sound.playAsync();
     } catch (error) {
       console.error("Error loading sound: ", error);
     }
   };
 
-  // Bileşen ilk yüklendiğinde scroll pozisyonunu yükle
   useEffect(() => {
     loadScrollIndex();
   }, []);
 
-  // ScrollView pozisyonunu ayarla
   useEffect(() => {
     if (scrollViewRef.current && scrollIndex > 0) {
       scrollViewRef.current.scrollTo({ y: scrollIndex, animated: false });
     }
   }, [scrollIndex]);
 
-  // Scroll pozisyonunu kaydetmek için listener ekle
   const handleScroll = (event) => {
-    const offsetY = event.nativeEvent.contentOffset.y; // Y eksenindeki scroll pozisyonunu al
-    saveScrollIndex(offsetY); // Kaydet
+    const offsetY = event.nativeEvent.contentOffset.y;
+    saveScrollIndex(offsetY);
   };
 
-  // Bileşen unmount olduğunda sesi temizle
   useEffect(() => {
     return () => {
       sound.unloadAsync(); 
@@ -78,10 +71,10 @@ const LibraryScreen = () => {
         <Text style={styles.topViewText}>Learned Words</Text>
       </View>
       <ScrollView 
-        ref={scrollViewRef} // ScrollView referansı
+        ref={scrollViewRef}
         contentContainerStyle={styles.scrollViewContent}
-        onScroll={handleScroll} // Scroll pozisyonu değiştiğinde kaydet
-        scrollEventThrottle={16} // Scroll eventini daha sık dinlemek için
+        onScroll={handleScroll}
+        scrollEventThrottle={16}
       >
         {words.cards.map((word, index) => (
           <View

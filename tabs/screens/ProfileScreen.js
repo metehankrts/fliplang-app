@@ -8,7 +8,7 @@ import { useNavigation } from '@react-navigation/native';
 import OnboardingScreen1 from '../../onboarding/OnboardingScreen1';
 
 const ProfileScreen = () => {
-  const navigation = useNavigation(); // useNavigation kancasını ekleyin
+  const navigation = useNavigation();
   const [user, setUser] = useState({ name: '', image: IMAGES.profile });
   const [totalWords, setTotalWords] = useState(0);
 
@@ -31,7 +31,6 @@ const ProfileScreen = () => {
   }, []);
 
   const handleLogout = () => {
-    // OnboardingScreen1.js sayfasına yönlendir
     navigation.goBack();
   };
 
