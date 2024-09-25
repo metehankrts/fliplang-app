@@ -50,6 +50,9 @@ In profile, I showed name and image data that I collected from user with asyncst
 
 Under it, you can see I directed the user to my social.
 
+![10](https://github.com/user-attachments/assets/546b4c6b-6a2d-4b79-bc1d-dc8e48a398bb)
+
+
 FINAL
 
 I hope you liked this project. I am a beginner in mobile area. If is there any idea that can help this project to improve, please let me know.
